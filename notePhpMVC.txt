@@ -1,1 +1,38 @@
-search materi .htaccess
+
+#3 Routing //youtube=sandhika//phpmvc
+//komfigurasi server pada folder app
+
+Options -Indexes 
+//kalau ada user yang mengakses folder app atau folder-folder didalam-nya, selama didalam folder itu tidak ada file index, maka jangan tampilkan isi folder/block aksesnya.
+
+//=============================================================
+Options -Multiviews
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ index.php?url=$1 [L]
+
+
+Options -Multiviews
+//menghindari kesalahan atau ambigu ketika kita memanggil folder atau file di dalam folder public 
+
+//melakukan rewrite / penulisan ulang URL yang berada pada browser kita
+
+RewriteEngine On  //menjalankan proses rewrite
+
+RewriteCond %{REQUEST_FILENAME}  //RewriteCond atau rewrite condition yang berisi %{REQUEST_FILENAME} 
+
+!-d  //jika URL yang ditulis itu merupakan folder kita abaikan
+!-f  //jika URL yang ditulis itu merupakan file kita abaikan
+
+RewriteRule ^(.*)$ index.php?url=$1 [L] //aturan untuk menulis ulang menggunakan aturan Regeks exsperesion. ambil apapun yang ditulis di URL mulai dari awal satu persatu sampai selesai kemudian arahkan ke file index.php yang mengirimkan URL dengan nilai...
+
+^ //apapun yang ditulis di URL mulai dari awal(setelah menulis public) 
+
+(.) //ambil apapun
+(.*) //ambil apapun satu persatu
+(.*)$ //ambil apapun satu persatu sampai selesai
+
+$1 //paste di sini 
+[L] //tambahkan flag/aturan //kalau ada rule yang sudah terpenuhi jangan jalankan rule setelah ini
